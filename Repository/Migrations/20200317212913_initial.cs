@@ -2,7 +2,7 @@
 
 namespace Repository.Migrations
 {
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -103,10 +103,12 @@ namespace Repository.Migrations
                 {
                     EmployeeId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
                     Position = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    RouteId = table.Column<int>(nullable: false)
+                    RouteId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -116,8 +118,18 @@ namespace Repository.Migrations
                         column: x => x.RouteId,
                         principalTable: "Routes",
                         principalColumn: "RouteId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "EmployeeId", "Email", "Name", "PhoneNumber", "Position", "RouteId", "UserId" },
+                values: new object[] { 1, null, "Aaron Madison", "414-429-6858", "Sales Representative", null, null });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "EmployeeId", "Email", "Name", "PhoneNumber", "Position", "RouteId", "UserId" },
+                values: new object[] { 2, null, "Amanda Miller", "414-429-6858", "Merchandier", null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_RouteId",

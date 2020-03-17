@@ -33,6 +33,8 @@ namespace RoutingAPI
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+
             services.AddControllers();
         }
 

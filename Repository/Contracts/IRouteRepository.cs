@@ -7,5 +7,6 @@ namespace Repository.Contracts
 {
     public interface IRouteRepository : IRepositoryBase<Route>
     {
+        Route GetRoute(int routeId);
     }
 }

@@ -6,7 +6,12 @@ namespace Repository.Contracts
 {
     public interface IRepositoryWrapper
     {
-        //interfaces go here
+        IEmployeeRepository Employees { get; }
+        IRouteRepository Routes { get; }
+        IScheduleRepository Schedules { get; }
+        IStopRepository Stops { get; }
+        IStoreRepository Stores { get; }
+        IDeliveryRepository Deliveries { get; }
         void Save();
     }
 }

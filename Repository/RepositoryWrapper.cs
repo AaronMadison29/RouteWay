@@ -70,7 +70,7 @@ namespace Repository
                 return _stop;
             }
         }
-        public IDeliveryRepository StudentClassGrades
+        public IDeliveryRepository Deliveries
         {
             get
             {

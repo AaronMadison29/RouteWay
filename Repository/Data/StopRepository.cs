@@ -13,5 +13,6 @@ namespace Repository.Data
         public StopRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
         }
+        public Stop GetStop(int stopId) => FindByCondition(c => c.StopId == stopId).SingleOrDefault();
     }
 }

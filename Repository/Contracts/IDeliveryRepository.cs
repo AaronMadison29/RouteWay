@@ -7,5 +7,6 @@ namespace Repository.Contracts
 {
     public interface IDeliveryRepository : IRepositoryBase<Delivery>
     {
+        Delivery GetDelivery(int deliveryId);
     }
 }

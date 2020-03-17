@@ -13,5 +13,6 @@ namespace Repository.Data
         public RouteRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
         }
+        public Route GetRoute(int routeId) => FindByCondition(c => c.RouteId == routeId).SingleOrDefault();
     }
 }

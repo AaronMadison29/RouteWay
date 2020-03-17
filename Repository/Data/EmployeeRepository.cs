@@ -13,5 +13,7 @@ namespace Repository.Data
         public EmployeeRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
         }
+        public Employee GetEmployee(int employeeId) => FindByCondition(c => c.EmployeeId == employeeId).SingleOrDefault();
+        public List<Employee> GetEmployees() => FindAll().ToList();
     }
 }

@@ -2,6 +2,7 @@
 using Repository.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Repository.Data
@@ -11,5 +12,6 @@ namespace Repository.Data
         public StoreRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
         }
+        public Store GetStore(int storeId) => FindByCondition(c => c.StoreId == storeId).SingleOrDefault();
     }
 }

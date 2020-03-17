@@ -13,5 +13,7 @@ namespace Repository.Data
         public DeliveryRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
         }
+
+        public Delivery GetDelivery(int deliveryId) => FindByCondition(c => c.DeliveryId == deliveryId).SingleOrDefault();
     }
 }

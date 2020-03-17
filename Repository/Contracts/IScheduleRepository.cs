@@ -7,5 +7,6 @@ namespace Repository.Contracts
 {
     public interface IScheduleRepository : IRepositoryBase<Schedule>
     {
+        Schedule GetSchedule(int scheduleId);
     }
 }

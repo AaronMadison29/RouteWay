@@ -10,8 +10,8 @@ using Repository.Data;
 namespace Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200317202226_init")]
-    partial class init
+    [Migration("20200317212913_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,20 +46,42 @@ namespace Repository.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Position")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RouteId")
+                    b.Property<int?>("RouteId")
                         .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EmployeeId");
 
                     b.HasIndex("RouteId");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            EmployeeId = 1,
+                            Name = "Aaron Madison",
+                            PhoneNumber = "414-429-6858",
+                            Position = "Sales Representative"
+                        },
+                        new
+                        {
+                            EmployeeId = 2,
+                            Name = "Amanda Miller",
+                            PhoneNumber = "414-429-6858",
+                            Position = "Merchandier"
+                        });
                 });
 
             modelBuilder.Entity("Repository.Models.Route", b =>
@@ -156,9 +178,7 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Repository.Models.Route", "Route")
                         .WithMany()
-                        .HasForeignKey("RouteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RouteId");
                 });
 
             modelBuilder.Entity("Repository.Models.Route", b =>

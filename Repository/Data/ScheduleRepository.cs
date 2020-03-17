@@ -13,5 +13,6 @@ namespace Repository.Data
         public ScheduleRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
         }
+        public Schedule GetSchedule(int scheduleId) => FindByCondition(c => c.ScheduleId == scheduleId).SingleOrDefault();
     }
 }

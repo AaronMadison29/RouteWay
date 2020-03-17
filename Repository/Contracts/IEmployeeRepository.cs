@@ -7,5 +7,7 @@ namespace Repository.Contracts
 {
     public interface IEmployeeRepository : IRepositoryBase<Employee>
     {
+        Employee GetEmployee(int employeeId);
+        public List<Employee> GetEmployees();
     }
 }
