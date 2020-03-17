@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Repository.Contracts;
+using Repository.Data;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,76 +9,76 @@ namespace Repository
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private ApplicationDbContext _context;
-        private ITeacherRepository _teacher;
-        private IStudentRepository _student;
-        private IParentRepository _parent;
-        private IClassRepository _class;
-        private IProfileRepository _profile;
-        private IStudentClassGradeRepository _studentClassGrades;
-        public ITeacherRepository Teachers
+        private IEmployeeRepository _employee;
+        private IRouteRepository _route;
+        private IStoreRepository _store;
+        private IScheduleRepository _schedule;
+        private IStopRepository _stop;
+        private IDeliveryRepository _delivery;
+        public IEmployeeRepository Employees
         {
             get
             {
-                if (_teacher == null)
+                if (_employee == null)
                 {
-                    _teacher = new TeacherRepository(_context);
+                    _employee = new EmployeeRepository(_context);
                 }
-                return _teacher;
+                return _employee;
             }
         }
-        public IStudentRepository Students
+        public IRouteRepository Routes
         {
             get
             {
-                if (_student == null)
+                if (_route == null)
                 {
-                    _student = new StudentRepository(_context);
+                    _route = new RouteRepository(_context);
                 }
-                return _student;
+                return _route;
             }
         }
-        public IParentRepository Parents
+        public IStoreRepository Stores
         {
             get
             {
-                if (_parent == null)
+                if (_store == null)
                 {
-                    _parent = new ParentRepository(_context);
+                    _store = new StoreRepository(_context);
                 }
-                return _parent;
+                return _store;
             }
         }
-        public IClassRepository Classes
+        public IScheduleRepository Schedules
         {
             get
             {
-                if (_class == null)
+                if (_schedule == null)
                 {
-                    _class = new ClassRepository(_context);
+                    _schedule = new ScheduleRepository(_context);
                 }
-                return _class;
+                return _schedule;
             }
         }
-        public IProfileRepository Profiles
+        public IStopRepository Stops
         {
             get
             {
-                if (_profile == null)
+                if (_stop == null)
                 {
-                    _profile = new ProfileRepository(_context);
+                    _stop = new StopRepository(_context);
                 }
-                return _profile;
+                return _stop;
             }
         }
-        public IStudentClassGradeRepository StudentClassGrades
+        public IDeliveryRepository StudentClassGrades
         {
             get
             {
-                if (_studentClassGrades == null)
+                if (_delivery == null)
                 {
-                    _studentClassGrades = new StudentClassGradesRepository(_context);
+                    _delivery = new DeliveryRepository(_context);
                 }
-                return _studentClassGrades;
+                return _delivery;
             }
         }
         public RepositoryWrapper(ApplicationDbContext context)
