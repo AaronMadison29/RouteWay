@@ -25,7 +25,14 @@ namespace RoutingAPI.Controllers
         [HttpGet("{id:int}")]
         public Employee Get(int id)
         {
-            return _repo.Employees.GetEmployee(id);
+            return _repo.Employees.GetEmployeeIncludeAll(id);
+        }
+
+        [HttpGet("{userId}")]
+        public Employee Get(string userId)
+        {
+            var employee = _repo.Employees.GetEmployeeIncludeAll(userId);
+            return employee;
         }
 
         [HttpPost]

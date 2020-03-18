@@ -10,9 +10,10 @@ namespace Repository.Models
     {
         [Key]
         public int StopId { get; set; }
-        public string type { get; set; }
+        public string Type { get; set; }
         public DayOfWeek DayOfWeek { get; set; }
-        public int ScheduleId { get; set; }
+        public int StoreId { get; set; }
+        public int EmployeeId { get; set; }
 
         [ForeignKey("Delivery")]
         public int? DeliveryId { get; set; }

@@ -10,8 +10,10 @@ namespace Repository.Models
     {
         [Key]
         public int ScheduleId { get; set; }
+        public int? StoreId { get; set; }
+        public int? EmployeeId { get; set; }
 
         [NotMapped]
-        public Stop Stops { get; set; }
+        public List<Stop> Stops { get; set; }
     }
 }

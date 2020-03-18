@@ -10,11 +10,11 @@ namespace Repository.Models
     {
         [Key]
         public int StoreId { get; set; }
+        public string StoreName { get; set; }
         public string PlaceId { get; set; }
         public string StreetAddress { get; set; }
-        public int Lat { get; set; }
-        public int Long { get; set; }
-        public int RouteId { get; set; }
+        public double Lat { get; set; }
+        public double Long { get; set; }
 
         [ForeignKey("Schedule")]
         public int ScheduleId { get; set; }

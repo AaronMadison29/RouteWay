@@ -21,7 +21,7 @@ namespace Repository.Models
         public string PhoneNumber { get; set; }
 
         [ForeignKey("Route")]
-        public int? RouteId { get; set; }
+        public int RouteId { get; set; }
         public Route Route { get; set; }
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.Data;
 
 namespace Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200318192601_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,7 +98,7 @@ namespace Repository.Migrations
                     b.Property<string>("Position")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RouteId")
+                    b.Property<int?>("RouteId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -114,24 +116,21 @@ namespace Repository.Migrations
                             EmployeeId = 1,
                             Name = "Aaron Madison",
                             PhoneNumber = "123-456-7891",
-                            Position = "Sales Representative",
-                            RouteId = 1
+                            Position = "Sales Representative"
                         },
                         new
                         {
                             EmployeeId = 2,
                             Name = "Amanda Miller",
                             PhoneNumber = "123-456-7891",
-                            Position = "Merchandier",
-                            RouteId = 2
+                            Position = "Merchandier"
                         },
                         new
                         {
                             EmployeeId = 3,
                             Name = "David Wroblewski",
                             PhoneNumber = "123-456-7891",
-                            Position = "Driver",
-                            RouteId = 3
+                            Position = "Driver"
                         });
                 });
 
@@ -559,9 +558,7 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Repository.Models.Route", "Route")
                         .WithMany()
-                        .HasForeignKey("RouteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RouteId");
                 });
 
             modelBuilder.Entity("Repository.Models.Route", b =>
