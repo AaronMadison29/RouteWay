@@ -5,8 +5,7 @@ using System.Text;
 
 namespace Repository.Contracts
 {
-    public interface IRouteRepository : IRepositoryBase<Route>
+    public interface IRouteStoreRepository : IRepositoryBase<RouteStore>
     {
-        Route GetRouteIncludeAll(int routeId);
     }
 }

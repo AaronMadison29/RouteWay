@@ -1,4 +1,5 @@
-﻿using Repository.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository.Contracts;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,6 @@ namespace Repository.Data
         public RouteRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
         }
-        public Route GetRoute(int routeId) => FindByCondition(c => c.RouteId == routeId).SingleOrDefault();
+        public Route GetRouteIncludeAll(int routeId) => FindByCondition(c => c.RouteId == routeId).Include(r => r.Schedule).Include("RouteStores").SingleOrDefault();
     }
 }

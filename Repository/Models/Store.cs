@@ -8,6 +8,10 @@ namespace Repository.Models
 {
     public class Store
     {
+        public Store()
+        {
+            this.RouteStores = new HashSet<RouteStore>();
+        }
         [Key]
         public int StoreId { get; set; }
         public string StoreName { get; set; }
@@ -19,5 +23,7 @@ namespace Repository.Models
         [ForeignKey("Schedule")]
         public int ScheduleId { get; set; }
         public Schedule Schedule { get; set; }
+
+        public virtual ICollection<RouteStore> RouteStores { get; set; }
     }
 }

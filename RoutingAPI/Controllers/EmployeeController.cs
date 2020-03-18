@@ -35,12 +35,6 @@ namespace RoutingAPI.Controllers
             return employee;
         }
 
-        [HttpPost]
-        public void Post([FromBody] Employee value)
-        {
-
-        }
-
         [HttpPut("{link}")]
         public void Put([FromBody] Employee employee)
         {

@@ -3,6 +3,7 @@ using Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data.Entity.ModelConfiguration;
 
 namespace Repository.Data
 {
@@ -18,6 +19,9 @@ namespace Repository.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<RouteStore>()
+                .HasKey(c => new { c.RouteId, c.StoreId });
 
             //Employees
             builder.Entity<Employee>().HasData(
@@ -180,7 +184,7 @@ namespace Repository.Data
                     StreetAddress = "250 W Holt Ave, Milwaukee, WI, 53207",
                     Lat = 42.984207,
                     Long = -87.912901,
-                    ScheduleId = 1,
+                    ScheduleId = 1
                 }
                 );
             builder.Entity<Store>().HasData(
@@ -192,7 +196,7 @@ namespace Repository.Data
                     StreetAddress = "4279 S 76th St, Greenfield, WI 53220",
                     Lat = 42.968154,
                     Long = -88.009032,
-                    ScheduleId = 2,
+                    ScheduleId = 2
                 }
                 );
             builder.Entity<Store>().HasData(
@@ -204,7 +208,7 @@ namespace Repository.Data
                     StreetAddress = "2625 S 108th St, West Allis, WI 53227",
                     Lat = 42.997154,
                     Long = -88.049858,
-                    ScheduleId = 3,
+                    ScheduleId = 3
                 }
                 );
             builder.Entity<Store>().HasData(
@@ -216,7 +220,7 @@ namespace Repository.Data
                     StreetAddress = "2600 S 108th St, West Allis, WI 53227",
                     Lat = 42.997076,
                     Long = -88.045524,
-                    ScheduleId = 4,
+                    ScheduleId = 4
                 }
                 );
             builder.Entity<Store>().HasData(
@@ -503,6 +507,24 @@ namespace Repository.Data
                     DeliveryId = 5
                 }
                 );
+
+            //RouteStores
+            int count = 1;
+            for (int y = 1; y <= 3; y++)
+            {
+                for (int i = 1; i <= 10; i++)
+                {
+                    builder.Entity<RouteStore>().HasData(
+                        new RouteStore
+                        {
+                            RouteStoreId = count,
+                            RouteId = y,
+                            StoreId = i
+                        }
+                        );
+                    count++;
+                }
+            }
         }
 
 
@@ -513,5 +535,6 @@ namespace Repository.Data
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Stop> Stops { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
+        public DbSet<RouteStore> RouteStores { get; set; }
     }
 }

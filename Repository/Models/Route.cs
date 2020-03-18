@@ -8,6 +8,10 @@ namespace Repository.Models
 {
     public class Route
     {
+        public Route()
+        {
+            this.RouteStores = new HashSet<RouteStore>();
+        }
         [Key]
         public int RouteId { get; set; }
         public string RouteName { get; set; }
@@ -16,7 +20,6 @@ namespace Repository.Models
         public int ScheduleId { get; set; }
         public Schedule Schedule { get; set; }
         
-        [NotMapped]
-        public List<Store> Stores { get; set; }
+        public virtual ICollection<RouteStore> RouteStores { get; set; }
     }
 }
