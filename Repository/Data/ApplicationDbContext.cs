@@ -22,6 +22,8 @@ namespace Repository.Data
 
             builder.Entity<RouteStore>()
                 .HasKey(c => new { c.RouteId, c.StoreId });
+            builder.Entity<ScheduleStop>()
+                .HasKey(c => new { c.ScheduleId, c.StopId });
 
             //Employees
             builder.Entity<Employee>().HasData(
@@ -39,7 +41,7 @@ namespace Repository.Data
                 {
                     EmployeeId = 2,
                     Name = "Amanda Miller",
-                    Position = "Merchandier",
+                    Position = "Merchandiser",
                     PhoneNumber = "123-456-7891",
                     RouteId = 2
                 }
@@ -525,6 +527,221 @@ namespace Repository.Data
                     count++;
                 }
             }
+
+            //ScheduleStops
+            //Employee One's Schedule
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 1,
+                    ScheduleId = 11,
+                    StopId = 1,
+                }
+                );
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 2,
+                    ScheduleId = 11,
+                    StopId = 2,
+                }
+                );
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 3,
+                    ScheduleId = 11,
+                    StopId = 3,
+                }
+                );
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 4,
+                    ScheduleId = 11,
+                    StopId = 4,
+                }
+                );
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 5,
+                    ScheduleId = 11,
+                    StopId = 5,
+                }
+                );
+            //Employee Two's Schedule
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 6,
+                    ScheduleId = 12,
+                    StopId = 6,
+                }
+                );
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 7,
+                    ScheduleId = 12,
+                    StopId = 7,
+                }
+                );
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 8,
+                    ScheduleId = 12,
+                    StopId = 8,
+                }
+                );
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 9,
+                    ScheduleId = 12,
+                    StopId = 9,
+                }
+                );
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 10,
+                    ScheduleId = 12,
+                    StopId = 10,
+                }
+                );
+            //Employee Three's Schedule
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 11,
+                    ScheduleId = 13,
+                    StopId = 11,
+                }
+                );
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 12,
+                    ScheduleId = 13,
+                    StopId = 12,
+                }
+                );
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 13,
+                    ScheduleId = 13,
+                    StopId = 13,
+                }
+                );
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 14,
+                    ScheduleId = 13,
+                    StopId = 14,
+                }
+                );
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 15,
+                    ScheduleId = 13,
+                    StopId = 15,
+                }
+                );
+            //Store 1 Stops
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 16,
+                    ScheduleId = 1,
+                    StopId = 1,
+                }
+                );
+            //Store 2 Stops
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 16,
+                    ScheduleId = 2,
+                    StopId = 2,
+                }
+                );
+            //Store 3 Stops
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 16,
+                    ScheduleId = 3,
+                    StopId = 3,
+                }
+                );
+            //Store 4 Stops
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 16,
+                    ScheduleId = 4,
+                    StopId = 4,
+                }
+                );
+            //Store 5 Stops
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 16,
+                    ScheduleId = 5,
+                    StopId = 5,
+                }
+                );
+            //Store 6 Stops
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 16,
+                    ScheduleId = 6,
+                    StopId = 6,
+                }
+                );
+            //Store 7 Stops
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 16,
+                    ScheduleId = 7,
+                    StopId = 7,
+                }
+                );
+            //Store 8 Stops
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 16,
+                    ScheduleId = 8,
+                    StopId = 8,
+                }
+                );
+            //Store 9 Stops
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 16,
+                    ScheduleId = 9,
+                    StopId = 9,
+                }
+                );
+            //Store 10 Stops
+            builder.Entity<ScheduleStop>().HasData(
+                new ScheduleStop
+                {
+                    ScheduleStopId = 16,
+                    ScheduleId = 10,
+                    StopId = 10,
+                }
+                );
         }
 
 
@@ -536,5 +753,6 @@ namespace Repository.Data
         public DbSet<Stop> Stops { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<RouteStore> RouteStores { get; set; }
+        public DbSet<ScheduleStop> ScheduleStops { get; set; }
     }
 }

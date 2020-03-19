@@ -13,6 +13,7 @@ namespace Repository.Contracts
         IStoreRepository Stores { get; }
         IDeliveryRepository Deliveries { get; }
         IRouteStoreRepository RouteStores { get; }
+        IScheduleStopRepository ScheduleStops { get; }
         void Save();
     }
 }

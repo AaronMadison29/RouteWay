@@ -8,12 +8,16 @@ namespace Repository.Models
 {
     public class Schedule
     {
+        public Schedule()
+        {
+            this.ScheduleStops = new HashSet<ScheduleStop>();
+        }
         [Key]
         public int ScheduleId { get; set; }
         public int? StoreId { get; set; }
         public int? EmployeeId { get; set; }
 
-        [NotMapped]
-        public List<Stop> Stops { get; set; }
+
+        public virtual ICollection<ScheduleStop> ScheduleStops { get; set; }
     }
 }

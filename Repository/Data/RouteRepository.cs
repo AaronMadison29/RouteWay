@@ -14,6 +14,6 @@ namespace Repository.Data
         public RouteRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
         }
-        public Route GetRouteIncludeAll(int routeId) => FindByCondition(c => c.RouteId == routeId).Include(r => r.Schedule).Include("RouteStores").SingleOrDefault();
+        public Route GetRouteIncludeAll(int routeId) => FindByCondition(c => c.RouteId == routeId).Include(r => r.Schedule).Include("RouteStores").Include("RouteStores.Store").SingleOrDefault();
     }
 }

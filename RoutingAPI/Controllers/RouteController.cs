@@ -22,7 +22,6 @@ namespace RoutingAPI.Controllers
         public Route Get(int id)
         {
             var route = _repo.Routes.GetRouteIncludeAll(id);
-            route.RouteStores = _repo.RouteStores.GetRouteStoresForRouteIncludeAll(route.RouteId).ToList();
             return route;
         }
     }

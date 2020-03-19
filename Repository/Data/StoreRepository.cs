@@ -14,7 +14,7 @@ namespace Repository.Data
         {
         }
         public Store GetStore(int storeId) => FindByCondition(c => c.StoreId == storeId).SingleOrDefault();
-        public Store GetStoreIncludeAll(int storeId) => FindByCondition(c => c.StoreId == storeId).Include(s => s.Schedule).SingleOrDefault();
+        public Store GetStoreIncludeAll(int storeId) => FindByCondition(c => c.StoreId == storeId).Include(s => s.Schedule).Include("RouteStores").Include("RouteStores.Route").SingleOrDefault();
         public List<Store> GetStores() => FindAll().ToList();
     }
 }

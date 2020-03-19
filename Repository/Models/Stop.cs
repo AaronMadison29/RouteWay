@@ -8,6 +8,10 @@ namespace Repository.Models
 {
     public class Stop
     {
+        public Stop()
+        {
+            this.ScheduleStops = new HashSet<ScheduleStop>();
+        }
         [Key]
         public int StopId { get; set; }
         public string Type { get; set; }
@@ -18,5 +22,7 @@ namespace Repository.Models
         [ForeignKey("Delivery")]
         public int? DeliveryId { get; set; }
         public Delivery Delivery { get; set; }
+
+        public virtual ICollection<ScheduleStop> ScheduleStops { get; set; }
     }
 }

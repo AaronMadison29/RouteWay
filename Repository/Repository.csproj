@@ -5,15 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200318204709_test2.cs" />
-    <Compile Remove="Migrations\20200318204709_test2.Designer.cs" />
-    <Compile Remove="Migrations\20200318213903_FixedRelationshipBetweenRouteAndStores.cs" />
-    <Compile Remove="Migrations\20200318213903_FixedRelationshipBetweenRouteAndStores.Designer.cs" />
-    <Compile Remove="Migrations\20200318220205_FixedRelationshipBetweenRouteAndStores2.cs" />
-    <Compile Remove="Migrations\20200318220205_FixedRelationshipBetweenRouteAndStores2.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.2">

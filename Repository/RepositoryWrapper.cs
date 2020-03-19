@@ -16,6 +16,7 @@ namespace Repository
         private IStopRepository _stop;
         private IDeliveryRepository _delivery;
         private IRouteStoreRepository _routeStore;
+        private IScheduleStopRepository _scheduleStop;
         public IEmployeeRepository Employees
         {
             get
@@ -91,6 +92,17 @@ namespace Repository
                     _routeStore = new RouteStoreRepository(_context);
                 }
                 return _routeStore;
+            }
+        }
+        public IScheduleStopRepository ScheduleStops
+        {
+            get
+            {
+                if (_scheduleStop == null)
+                {
+                    _scheduleStop = new ScheduleStopRepository(_context);
+                }
+                return _scheduleStop;
             }
         }
         public RepositoryWrapper(ApplicationDbContext context)
