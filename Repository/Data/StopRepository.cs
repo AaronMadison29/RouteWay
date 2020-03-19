@@ -1,4 +1,5 @@
-﻿using Repository.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository.Contracts;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace Repository.Data
         {
         }
         public Stop GetStop(int stopId) => FindByCondition(c => c.StopId == stopId).SingleOrDefault();
+        public Stop GetStopIncludeAll(int stopId) => FindByCondition(c => c.StopId == stopId).Include(s => s.Delivery).SingleOrDefault();
     }
 }

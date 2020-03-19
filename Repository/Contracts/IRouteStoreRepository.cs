@@ -7,5 +7,7 @@ namespace Repository.Contracts
 {
     public interface IRouteStoreRepository : IRepositoryBase<RouteStore>
     {
+        public List<RouteStore> GetRouteStoresForRouteIncludeAll(int routeId);
+        public List<RouteStore> GetRouteStoresForStoreIncludeAll(int storeId);
     }
 }

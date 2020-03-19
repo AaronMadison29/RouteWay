@@ -1,4 +1,5 @@
-﻿using Repository.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository.Contracts;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,7 @@ namespace Repository.Data
         {
         }
         public Store GetStore(int storeId) => FindByCondition(c => c.StoreId == storeId).SingleOrDefault();
+        public Store GetStoreIncludeAll(int storeId) => FindByCondition(c => c.StoreId == storeId).Include(s => s.Schedule).SingleOrDefault();
+        public List<Store> GetStores() => FindAll().ToList();
     }
 }

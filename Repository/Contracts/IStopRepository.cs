@@ -7,6 +7,7 @@ namespace Repository.Contracts
 {
     public interface IStopRepository : IRepositoryBase<Stop>
     {
-        Stop GetStop(int stopId);
+        public Stop GetStop(int stopId);
+        public Stop GetStopIncludeAll(int stopId);
     }
 }
