@@ -10,7 +10,7 @@ using Repository.Data;
 namespace Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200321205341_reseeddb")]
+    [Migration("20200321205505_reseeddb")]
     partial class reseeddb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

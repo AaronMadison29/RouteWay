@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Repository.Models;
+using RouteWayAPP.Models;
 using RouteWayAPP.Contracts;
 using System;
 using System.Collections.Generic;
@@ -86,6 +86,19 @@ namespace RouteWayAPP.Services
             return null;
         }
         public async Task<List<ScheduleStop>> GetScheduleStopsForSchedule(int scheduleId)
+        {
+            HttpClient client = new HttpClient();
+            string url = "https://localhost:44339/api/ScheduleStop/" + scheduleId;
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<ScheduleStop>>(json);
+            }
+            return null;
+        }
+        public async Task<List<ScheduleStop>> GetScheduleStopsForToday(int scheduleId)
         {
             HttpClient client = new HttpClient();
             string url = "https://localhost:44339/api/ScheduleStop/" + scheduleId;

@@ -13,8 +13,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using Repository.Models;
 using RouteWayAPP.Contracts;
+using RouteWayAPP.Models;
 
 namespace RouteWayAPP.Areas.Identity.Pages.Account
 {

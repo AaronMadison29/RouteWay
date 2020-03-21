@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RouteWayAPP.Contracts;
+using RouteWayAPP.Models;
 
 namespace RouteWayAPP.Controllers
 {
@@ -24,7 +25,7 @@ namespace RouteWayAPP.Controllers
             var employee = await _routingService.GetEmployee(userId);
             ViewBag.UserEmployeeId = employee.EmployeeId;
             var scheduleStops = await _routingService.GetScheduleStopsForSchedule(employee.Route.ScheduleId);
-            employee.Route.Schedule.ScheduleStops = scheduleStops;
+            employee.Route.Schedule.ScheduleStops = FilterScheduleForToday(scheduleStops);
             return View(employee);
         }
 
@@ -72,6 +73,11 @@ namespace RouteWayAPP.Controllers
 
             var employee = await _routingService.GetEmployee(employeeId);
             return View(employee);
+        }
+
+        public List<ScheduleStop> FilterScheduleForToday(List<ScheduleStop> scheduleStops)
+        {
+            return scheduleStops.Where(ss => ss.Stop.DayOfWeek == DayOfWeek.Monday).ToList();
         }
     }
 }

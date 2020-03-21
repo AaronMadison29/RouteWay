@@ -7,6 +7,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200321202623_reinit.cs" />
     <Compile Remove="Migrations\20200321202623_reinit.Designer.cs" />
+    <Compile Remove="Migrations\20200321205341_reseeddb.cs" />
+    <Compile Remove="Migrations\20200321205341_reseeddb.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
