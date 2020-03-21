@@ -48,6 +48,7 @@ namespace RouteWayAPP.Controllers
 
 
             var store = await _routingService.GetStore(storeId);
+            store.Schedule.ScheduleStops = await _routingService.GetScheduleStopsForSchedule(store.Schedule.ScheduleId);
             return View(store);
         }
 

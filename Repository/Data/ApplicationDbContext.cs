@@ -345,6 +345,186 @@ namespace Repository.Data
                     DeliveryTime = "12:15:00"
                 }
                 );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 6,
+                    DriverId = 3,
+                    CaseCount = 34,
+                    DeliveryTime = "12:45:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 7,
+                    DriverId = 3,
+                    CaseCount = 78,
+                    DeliveryTime = "05:15:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 8,
+                    DriverId = 3,
+                    CaseCount = 65,
+                    DeliveryTime = "12:45:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 9,
+                    DriverId = 3,
+                    CaseCount = 89,
+                    DeliveryTime = "10:30:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 10,
+                    DriverId = 3,
+                    CaseCount = 34,
+                    DeliveryTime = "9:45:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 11,
+                    DriverId = 3,
+                    CaseCount = 45,
+                    DeliveryTime = "11:15:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 12,
+                    DriverId = 3,
+                    CaseCount = 87,
+                    DeliveryTime = "9:15:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 13,
+                    DriverId = 3,
+                    CaseCount = 58,
+                    DeliveryTime = "8:00:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 14,
+                    DriverId = 3,
+                    CaseCount = 37,
+                    DeliveryTime = "7:45:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 15,
+                    DriverId = 3,
+                    CaseCount = 20,
+                    DeliveryTime = "10:15:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 16,
+                    DriverId = 3,
+                    CaseCount = 60,
+                    DeliveryTime = "13:45:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 17,
+                    DriverId = 3,
+                    CaseCount = 90,
+                    DeliveryTime = "14:15:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 18,
+                    DriverId = 3,
+                    CaseCount = 50,
+                    DeliveryTime = "12:15:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 19,
+                    DriverId = 3,
+                    CaseCount = 70,
+                    DeliveryTime = "15:00:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 20,
+                    DriverId = 3,
+                    CaseCount = 65,
+                    DeliveryTime = "13:45:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 21,
+                    DriverId = 3,
+                    CaseCount = 72,
+                    DeliveryTime = "13:00:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 22,
+                    DriverId = 3,
+                    CaseCount = 75,
+                    DeliveryTime = "06:30:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 23,
+                    DriverId = 3,
+                    CaseCount = 125,
+                    DeliveryTime = "06:00:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 24,
+                    DriverId = 3,
+                    CaseCount = 100,
+                    DeliveryTime = "12:15:00"
+                }
+                );
+            builder.Entity<Delivery>().HasData(
+                new Delivery
+                {
+                    DeliveryId = 25,
+                    DriverId = 3,
+                    CaseCount = 295,
+                    DeliveryTime = "12:00:00"
+                }
+                );
 
             //Stops
             //Employee 1 Monday
