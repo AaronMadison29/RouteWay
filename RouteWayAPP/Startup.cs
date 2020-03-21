@@ -33,6 +33,7 @@ namespace RouteWayAPP
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IRoutingService, RoutingService>();
+            services.AddScoped<IPlaceService, PlaceService>();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));

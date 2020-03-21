@@ -13,13 +13,6 @@ namespace RouteWayAPP.Services
 {
     public class RoutingService : IRoutingService
     {
-        private readonly IConfiguration _config;
-
-
-        public RoutingService(IConfiguration config)
-        {
-            _config = config;
-        }
         public async Task<Employee> GetEmployee(string userId)
         {
             HttpClient client = new HttpClient();

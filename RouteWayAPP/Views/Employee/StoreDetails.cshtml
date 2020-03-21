@@ -1,73 +1,90 @@
 ﻿@model RouteWayAPP.Models.Store
 
 @{
-    ViewData["Title"] = "StoreDetails";
+    ViewData["Title"] = "Store Details";
 }
 
-<h1>StoreDetails</h1>
+    <h1>
+        @Html.DisplayFor(model => model.StoreName)
+    </h1>
 
 <div>
-    <h4>Store</h4>
+    <h4>
+        Store Details
+    </h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.StoreName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.StoreName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.StreetAddress)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.StreetAddress)
-        </dd>
-    </dl>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.StreetAddress)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.StreetAddress)
+            </dd>
+            <dt class="col-sm-4">
+                Phone Number
+            </dt>
+            <dd class="col-sm-8">
+                @ViewBag.StoreInfo.result.formatted_phone_number
+            </dd>
+            <dt class="col-sm-4">
+                Rating
+            </dt>
+            <dd class="col-sm-8">
+                @ViewBag.StoreInfo.result.rating
+            </dd>
+        </dl>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Day of Week
+                    </th>
+                    <th>
+                        Employee Name
+                    </th>
+                    <th>
+                        Service Type
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var schedule in Model.Schedule.ScheduleStops)
+                {
+                    if (schedule.Stop.Type != "Drop Off")
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => schedule.Stop.DayOfWeek)
+                            </td>
+                            <td>
+                                @Html.ActionLink($"{schedule.Stop.EmployeeId}", "EmployeeDetails", new { employeeId = schedule.Stop.EmployeeId })
+                            </td>
+                            <td>
+                                @if (schedule.Stop.Type == "Delivery")
+                                {
+                                    @Html.ActionLink($"{schedule.Stop.Type}", "DeliveryDetails", new { deliveryId = schedule.Stop.DeliveryId })
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => schedule.Stop.Type)
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-6">
+        <body onload="initialize()">
+            <div id="map" style="width: 700px; height: 480px;"></div>
+        </body>
+    </div>
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Day of Week
-            </th>
-            <th>
-                Employee Name
-            </th>
-            <th>
-                Service Type
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var schedule in Model.Schedule.ScheduleStops)
-        {
-            if (schedule.Stop.Type != "Drop Off")
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => schedule.Stop.DayOfWeek)
-                    </td>
-                    <td>
-                        @Html.ActionLink($"{schedule.Stop.EmployeeId}", "EmployeeDetails", new { employeeId = schedule.Stop.EmployeeId })
-                    </td>
-                    <td>
-                        @if (schedule.Stop.Type == "Delivery")
-                        {
-                            @Html.ActionLink($"{schedule.Stop.Type}", "DeliveryDetails", new { deliveryId = schedule.Stop.DeliveryId })
-                        }
-                        else
-                        {
-                            @Html.DisplayFor(modelItem => schedule.Stop.Type)
-                        }
-                    </td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
-
-<h3>Map View</h3>
 <script>
   var map;
   function initialize() {
@@ -81,9 +98,6 @@
             position: {lat: @Model.Lat, lng: @Model.Long}
         });
   }</script>
-<body onload="initialize()">
-    <div id="map" style="width: 700px; height: 480px;"></div>
-</body>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key= + @KeyVariables.GoogleKey">
 </script>

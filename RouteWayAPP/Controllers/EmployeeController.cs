@@ -13,10 +13,12 @@ namespace RouteWayAPP.Controllers
     public class EmployeeController : Controller
     {
         private readonly IRoutingService _routingService;
+        private readonly IPlaceService _placeService;
 
-        public EmployeeController(IRoutingService routingService)
+        public EmployeeController(IRoutingService routingService, IPlaceService placeService)
         {
             _routingService = routingService;
+            _placeService = placeService;
         }
 
         public async Task<ActionResult> Index()
@@ -50,6 +52,9 @@ namespace RouteWayAPP.Controllers
 
             var store = await _routingService.GetStore(storeId);
             store.Schedule.ScheduleStops = await _routingService.GetScheduleStopsForSchedule(store.Schedule.ScheduleId);
+
+            ViewBag.StoreInfo = await _placeService.GetPlaceInfo(store.PlaceId);
+
             return View(store);
         }
 
