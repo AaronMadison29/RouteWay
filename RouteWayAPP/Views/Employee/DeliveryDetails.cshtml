@@ -1,0 +1,39 @@
+﻿@model Repository.Models.Delivery
+
+@{
+    ViewData["Title"] = "DeliveryDetails";
+}
+
+<h1>DeliveryDetails</h1>
+
+<div>
+    <h4>Delivery</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DeliveryId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DeliveryId)
+        </dd>
+        <dt class = "col-sm-2">
+            Driver
+        </dt>
+        <dd class="col-sm-10">
+            @Html.ActionLink($"{ViewBag.Driver.Name}", "EmployeeDetails", new { employeeId = Model.DriverId })
+            
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CaseCount)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CaseCount)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DeliveryTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DeliveryTime)
+        </dd>
+    </dl>
+</div>

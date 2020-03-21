@@ -8,6 +8,12 @@ namespace RouteWayAPP.Contracts
 {
     public interface IRoutingService
     {
+        Task<Employee> GetEmployee(string userId);
+        Task<Employee> GetEmployee(int employeeId);
+        Task<Store> GetStore(int storeId);
+        Task<Stop> GetStop(int stopId);
+        Task<Delivery> GetDelivery(int deliveryId);
+        Task<List<ScheduleStop>> GetScheduleStopsForSchedule(int id);
         Task LinkEmployeeAccount(Employee employee);
     }
 }

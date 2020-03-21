@@ -305,7 +305,7 @@ namespace Repository.Data
                     DeliveryId = 1,
                     DriverId = 3,
                     CaseCount = 100,
-                    DeliveryTime = new TimeSpan(8, 15, 00),
+                    DeliveryTime = "08:15:00"
                 }
                 );
             builder.Entity<Delivery>().HasData(
@@ -314,7 +314,7 @@ namespace Repository.Data
                     DeliveryId = 2,
                     DriverId = 3,
                     CaseCount = 65,
-                    DeliveryTime = new TimeSpan(9, 30, 00),
+                    DeliveryTime = "09:30:00"
                 }
                 );
             builder.Entity<Delivery>().HasData(
@@ -323,7 +323,7 @@ namespace Repository.Data
                     DeliveryId = 3,
                     DriverId = 3,
                     CaseCount = 98,
-                    DeliveryTime = new TimeSpan(10, 11, 00),
+                    DeliveryTime = "10:11:00"
                 }
                 );
             builder.Entity<Delivery>().HasData(
@@ -332,7 +332,7 @@ namespace Repository.Data
                     DeliveryId = 4,
                     DriverId = 3,
                     CaseCount = 72,
-                    DeliveryTime = new TimeSpan(6, 00, 00),
+                    DeliveryTime = "6:30:00"
                 }
                 );
             builder.Entity<Delivery>().HasData(
@@ -341,7 +341,7 @@ namespace Repository.Data
                     DeliveryId = 5,
                     DriverId = 3,
                     CaseCount = 89,
-                    DeliveryTime = new TimeSpan(12, 30, 00),
+                    DeliveryTime = "12:15:00"
                 }
                 );
 

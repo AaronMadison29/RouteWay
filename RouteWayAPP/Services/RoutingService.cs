@@ -20,6 +20,84 @@ namespace RouteWayAPP.Services
         {
             _config = config;
         }
+        public async Task<Employee> GetEmployee(string userId)
+        {
+            HttpClient client = new HttpClient();
+            string url = "https://localhost:44339/api/Employee/" + userId;
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<Employee>(json);
+            }
+            return null;
+        }
+        public async Task<Employee> GetEmployee(int employeeId)
+        {
+            HttpClient client = new HttpClient();
+            string url = "https://localhost:44339/api/Employee/" + employeeId;
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<Employee>(json);
+            }
+            return null;
+        }
+        public async Task<Store> GetStore(int storeId)
+        {
+            HttpClient client = new HttpClient();
+            string url = "https://localhost:44339/api/Store/" + storeId;
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<Store>(json);
+            }
+            return null;
+        }
+        public async Task<Delivery> GetDelivery(int deliveryId)
+        {
+            HttpClient client = new HttpClient();
+            string url = "https://localhost:44339/api/Delivery/" + deliveryId;
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<Delivery>(json);
+            }
+            return null;
+        }
+        public async Task<Stop> GetStop(int stopId)
+        {
+            HttpClient client = new HttpClient();
+            string url = "https://localhost:44339/api/Stop/" + stopId;
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<Stop>(json);
+            }
+            return null;
+        }
+        public async Task<List<ScheduleStop>> GetScheduleStopsForSchedule(int scheduleId)
+        {
+            HttpClient client = new HttpClient();
+            string url = "https://localhost:44339/api/ScheduleStop/" + scheduleId;
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<ScheduleStop>>(json);
+            }
+            return null;
+        }
 
         public async Task LinkEmployeeAccount(Employee employee)
         {

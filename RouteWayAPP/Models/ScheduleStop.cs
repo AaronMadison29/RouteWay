@@ -6,20 +6,17 @@ using System.Text;
 
 namespace RouteWayAPP.Models
 {
-    public class Route
+    public class ScheduleStop
     {
-        public Route()
-        {
-            this.RouteStores = new HashSet<RouteStore>();
-        }
         [Key]
-        public int RouteId { get; set; }
-        public string RouteName { get; set; }
+        public int ScheduleStopId { get; set; }
 
         [ForeignKey("Schedule")]
         public int ScheduleId { get; set; }
         public Schedule Schedule { get; set; }
-        
-        public virtual ICollection<RouteStore> RouteStores { get; set; }
+
+        [ForeignKey("Stop")]
+        public int StopId { get; set; }
+        public Stop Stop { get; set; }
     }
 }

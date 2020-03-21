@@ -1,4 +1,5 @@
-﻿using Repository.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository.Contracts;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace Repository.Data
         {
         }
         public Schedule GetSchedule(int scheduleId) => FindByCondition(c => c.ScheduleId == scheduleId).SingleOrDefault();
+        public Schedule GetScheduleIncludeAll(int scheduleId) => FindByCondition(c => c.ScheduleId == scheduleId).Include(s => s.ScheduleStops).Include("ScheduleStops.Stop").SingleOrDefault();
     }
 }

@@ -1,0 +1,53 @@
+﻿@model Repository.Models.Employee
+
+@{
+    ViewData["Title"] = "Index";
+}
+    <div>
+        <h1>Hello, @Html.DisplayFor(model => model.Name)</h1>
+
+        <h2>Here's your schedule for today:</h2>
+    </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Store Id
+            </th>
+            <th>
+                Store Name
+            </th>
+            <th>
+                Street Address
+            </th>
+            <th>
+                Duties
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var schedule in Model.Route.Schedule.ScheduleStops)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => schedule.Stop.StoreId)
+                </td>
+                <td>
+                    @Html.ActionLink($"{schedule.Stop.Store.StoreName}", "StoreDetails", new { storeId = schedule.Stop.Store.StoreId })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => schedule.Stop.Store.StreetAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => schedule.Stop.Type)
+                </td>
+                <td>
+                    @Html.ActionLink("Stop Details", "StopDetails", new { stopId = schedule.Stop.StopId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+Map with pins connected by quickest route goes here

@@ -16,7 +16,7 @@ namespace Repository.Data
         }
         public Employee GetEmployee(string employeeUserId) => FindByCondition(c => c.UserId == employeeUserId).SingleOrDefault();
         public Employee GetEmployee(int employeeId) => FindByCondition(c => c.EmployeeId == employeeId).SingleOrDefault();
-        public Employee GetEmployeeIncludeAll(string employeeUserId) => FindByCondition(e => e.UserId == employeeUserId).Include(e => e.Route).SingleOrDefault();
+        public Employee GetEmployeeIncludeAll(string employeeUserId) => FindByCondition(e => e.UserId == employeeUserId).Include(e => e.Route).Include("Route.Schedule").SingleOrDefault();
         public Employee GetEmployeeIncludeAll(int employeeId) => FindByCondition(e => e.EmployeeId == employeeId).Include(e => e.Route).SingleOrDefault();
         public List<Employee> GetEmployees() => FindAll().ToList();
     }

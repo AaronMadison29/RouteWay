@@ -14,7 +14,7 @@ namespace Repository.Data
         public ScheduleStopRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
         }
-        public List<ScheduleStop> GetScheduleStopForScheduleIncludeAll(int scheduleId) => FindByCondition(rs => rs.ScheduleId == scheduleId).Include(rs => rs.Stop).ToList();
+        public List<ScheduleStop> GetScheduleStopForScheduleIncludeAll(int scheduleId) => FindByCondition(rs => rs.ScheduleId == scheduleId).Include(rs => rs.Stop).Include("Stop.Store").ToList();
         public List<ScheduleStop> GetScheduleStopForStopIncludeAll(int stopId) => FindByCondition(rs => rs.StopId == stopId).Include(rs => rs.Schedule).ToList();
     }
 }

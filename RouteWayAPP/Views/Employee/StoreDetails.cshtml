@@ -1,0 +1,29 @@
+﻿@model Repository.Models.Store
+
+@{
+    ViewData["Title"] = "StoreDetails";
+}
+
+<h1>StoreDetails</h1>
+
+<div>
+    <h4>Store</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StoreName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StoreName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StreetAddress)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StreetAddress)
+        </dd>
+    </dl>
+    List of stops goes here
+</div>
+
+Map with location pin goes here

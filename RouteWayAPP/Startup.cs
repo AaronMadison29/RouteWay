@@ -14,6 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RouteWayAPP.Services;
 using RouteWayAPP.Contracts;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using RouteWayAPP.ActionFilters;
 
 namespace RouteWayAPP
 {
@@ -38,6 +41,12 @@ namespace RouteWayAPP
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddScoped<ClaimsPrincipal>(s =>
+                s.GetService<IHttpContextAccessor>().HttpContext.User);
+            services.AddControllers(config =>
+            {
+                config.Filters.Add(typeof(GlobalRouting));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

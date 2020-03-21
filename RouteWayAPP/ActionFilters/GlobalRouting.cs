@@ -25,7 +25,10 @@ namespace RouteWayAPP.ActionFilters
             var action = context.RouteData.Values["action"];
             if (controller.Equals("Home") && action.Equals("Index"))
             {
-                //rerouting goes here
+                if(_claimsPrincipal.Identity.IsAuthenticated)
+                {
+                    context.Result = new RedirectToActionResult("Index", "Employee", null);
+                }
             }
         }
     }

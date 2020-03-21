@@ -8,21 +8,24 @@ namespace Repository.Models
 {
     public class Stop
     {
-        public Stop()
-        {
-            this.ScheduleStops = new HashSet<ScheduleStop>();
-        }
+        //public Stop()
+        //{
+        //    this.ScheduleStops = new HashSet<ScheduleStop>();
+        //}
         [Key]
         public int StopId { get; set; }
         public string Type { get; set; }
         public DayOfWeek DayOfWeek { get; set; }
-        public int StoreId { get; set; }
         public int EmployeeId { get; set; }
+
+        [ForeignKey("Store")]
+        public int StoreId { get; set; }
+        public Store Store { get; set; }
 
         [ForeignKey("Delivery")]
         public int? DeliveryId { get; set; }
         public Delivery Delivery { get; set; }
 
-        public virtual ICollection<ScheduleStop> ScheduleStops { get; set; }
+        //public virtual ICollection<ScheduleStop> ScheduleStops { get; set; }
     }
 }
