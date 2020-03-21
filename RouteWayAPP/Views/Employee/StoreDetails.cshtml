@@ -23,9 +23,49 @@
             @Html.DisplayFor(model => model.StreetAddress)
         </dd>
     </dl>
-    List of stops goes here
 </div>
 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Day of Week
+            </th>
+            <th>
+                Employee Name
+            </th>
+            <th>
+                Service Type
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var schedule in Model.Schedule.ScheduleStops)
+        {
+            if (schedule.Stop.Type != "Drop Off")
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => schedule.Stop.DayOfWeek)
+                    </td>
+                    <td>
+                        @Html.ActionLink($"{schedule.Stop.EmployeeId}", "EmployeeDetails", new { employeeId = schedule.Stop.EmployeeId })
+                    </td>
+                    <td>
+                        @if (schedule.Stop.Type == "Delivery")
+                        {
+                            @Html.ActionLink($"{schedule.Stop.Type}", "DeliveryDetails", new { deliveryId = schedule.Stop.DeliveryId })
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => schedule.Stop.Type)
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
 
 <h3>Map View</h3>
 <script>

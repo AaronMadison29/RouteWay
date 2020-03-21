@@ -78,6 +78,7 @@ namespace RouteWayAPP.Controllers
         public List<ScheduleStop> FilterScheduleForToday(List<ScheduleStop> scheduleStops)
         {
             return scheduleStops.Where(ss => ss.Stop.DayOfWeek == DayOfWeek.Monday).ToList();
+            //return scheduleStops.Where(ss => ss.Stop.DayOfWeek == DateTime.Now.DayOfWeek).ToList();
         }
     }
 }
