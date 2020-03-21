@@ -13,6 +13,19 @@ namespace RouteWayAPP.Services
 {
     public class RoutingService : IRoutingService
     {
+        public async Task<List<Employee>> GetEmployees()
+        {
+            HttpClient client = new HttpClient();
+            string url = "https://localhost:44339/api/Employee/";
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Employee>>(json);
+            }
+            return null;
+        }
         public async Task<Employee> GetEmployee(string userId)
         {
             HttpClient client = new HttpClient();

@@ -60,7 +60,13 @@
                                 @Html.DisplayFor(modelItem => schedule.Stop.DayOfWeek)
                             </td>
                             <td>
-                                @Html.ActionLink($"{schedule.Stop.EmployeeId}", "EmployeeDetails", new { employeeId = schedule.Stop.EmployeeId })
+                                @foreach (var employee in ViewBag.Employees)
+                                {
+                                    if (employee.EmployeeId == schedule.Stop.EmployeeId)
+                                    {
+                                        <a asp-action="EmployeeDetails" asp-route-employeeId="@schedule.Stop.EmployeeId">@employee.Name</a>
+                                    }
+                                }
                             </td>
                             <td>
                                 @if (schedule.Stop.Type == "Delivery")

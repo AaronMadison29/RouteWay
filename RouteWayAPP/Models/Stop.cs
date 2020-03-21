@@ -13,6 +13,7 @@ namespace RouteWayAPP.Models
         public string Type { get; set; }
         public DayOfWeek DayOfWeek { get; set; }
         public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
 
         [ForeignKey("Store")]
         public int StoreId { get; set; }

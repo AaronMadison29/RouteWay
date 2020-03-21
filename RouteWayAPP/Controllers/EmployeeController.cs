@@ -54,6 +54,7 @@ namespace RouteWayAPP.Controllers
             store.Schedule.ScheduleStops = await _routingService.GetScheduleStopsForSchedule(store.Schedule.ScheduleId);
 
             ViewBag.StoreInfo = await _placeService.GetPlaceInfo(store.PlaceId);
+            ViewBag.Employees = await _routingService.GetEmployees();
 
             return View(store);
         }

@@ -10,6 +10,7 @@ namespace RouteWayAPP.Contracts
     {
         Task<Employee> GetEmployee(string userId);
         Task<Employee> GetEmployee(int employeeId);
+        Task<List<Employee>> GetEmployees();
         Task<Store> GetStore(int storeId);
         Task<Stop> GetStop(int stopId);
         Task<Delivery> GetDelivery(int deliveryId);
