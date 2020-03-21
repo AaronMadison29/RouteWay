@@ -21,9 +21,12 @@
                         <li class="nav-item active">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-controller="Employee" asp-action="EmployeeDetails" asp-route-employeeId="@ViewBag.UserEmployeeId">Employee Details</a>
-                        </li>
+                        @if (ViewBag.UserEmployeeId != null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="Employee" asp-action="EmployeeDetails" asp-route-employeeId="@ViewBag.UserEmployeeId">Employee Details</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
