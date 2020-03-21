@@ -26,4 +26,24 @@
     List of stops goes here
 </div>
 
-Map with location pin goes here
+
+<h3>Map View</h3>
+<script>
+  var map;
+  function initialize() {
+      var mapOptions = {
+      center: {lat: @Model.Lat, lng: @Model.Long},
+      zoom: 17,
+    }
+      map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      var marker = new google.maps.Marker({
+            map: map,
+            position: {lat: @Model.Lat, lng: @Model.Long}
+        });
+  }</script>
+<body onload="initialize()">
+    <div id="map" style="width: 700px; height: 480px;"></div>
+</body>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key= + @KeyVariables.GoogleKey">
+</script>
