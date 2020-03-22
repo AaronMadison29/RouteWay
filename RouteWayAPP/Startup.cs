@@ -34,6 +34,7 @@ namespace RouteWayAPP
         {
             services.AddScoped<IRoutingService, RoutingService>();
             services.AddScoped<IPlaceService, PlaceService>();
+            services.AddScoped<IDistanceMatrixService, DistanceMatrixService>();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));

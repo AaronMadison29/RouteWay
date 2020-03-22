@@ -14,11 +14,13 @@ namespace RouteWayAPP.Controllers
     {
         private readonly IRoutingService _routingService;
         private readonly IPlaceService _placeService;
+        private readonly IDistanceMatrixService _distanceMatrixService;
 
-        public EmployeeController(IRoutingService routingService, IPlaceService placeService)
+        public EmployeeController(IRoutingService routingService, IPlaceService placeService, IDistanceMatrixService distanceMatrixService)
         {
             _routingService = routingService;
             _placeService = placeService;
+            _distanceMatrixService = distanceMatrixService;
         }
 
         public async Task<ActionResult> Index()
@@ -27,7 +29,7 @@ namespace RouteWayAPP.Controllers
             var employee = await _routingService.GetEmployee(userId);
             ViewBag.UserEmployeeId = employee.EmployeeId;
             var scheduleStops = await _routingService.GetScheduleStopsForSchedule(employee.Route.ScheduleId);
-            employee.Route.Schedule.ScheduleStops = FilterScheduleForToday(scheduleStops);
+            employee.Route.Schedule.ScheduleStops = SortByTime(FilterScheduleForToday(scheduleStops));
             return View(employee);
         }
 
@@ -90,6 +92,69 @@ namespace RouteWayAPP.Controllers
         {
             return scheduleStops.Where(ss => ss.Stop.DayOfWeek == DayOfWeek.Monday).ToList();
             //return scheduleStops.Where(ss => ss.Stop.DayOfWeek == DateTime.Now.DayOfWeek).ToList();
+        }
+
+        public List<ScheduleStop> SortByTime(List<ScheduleStop> scheduleStops)
+        {
+            var timedStops = scheduleStops.Where(ss => ss.Stop.DeliveryId != null).ToList();
+            timedStops = timedStops.OrderBy(ss => ss.Stop.Delivery.DeliveryTime).ToList();
+            var untimedStops = scheduleStops.Where(ss => ss.Stop.DeliveryId == null).ToList();
+
+            var sortedStops = new List<ScheduleStop>();
+
+            for(int i = 0; i < timedStops.Count; i++)
+            {
+                if(i == 0)
+                {
+                    if (timedStops[i].Stop.Delivery.DeliveryTime > new TimeSpan(6, 30, 0))
+                    {
+                        var closestStop = FindClosestStop(timedStops[i], untimedStops);
+                        untimedStops.Remove(closestStop);
+                        sortedStops.Add(closestStop);
+                        sortedStops.Add(timedStops[i]);
+                        continue;
+                    }
+                    else
+                    {
+                        sortedStops.Add(timedStops[i]);
+                    }
+                }
+                else
+                {
+                    if (timedStops[i].Stop.Delivery.DeliveryTime > timedStops[i - 1].Stop.Delivery.DeliveryTime + new TimeSpan(0,30,0))
+                    {
+                        var closestStop = FindClosestStop(timedStops[i], untimedStops);
+                        untimedStops.Remove(closestStop);
+                        sortedStops.Add(closestStop);
+                    }
+                    else
+                    {
+                        sortedStops.Add(timedStops[i]);
+                    }
+                }
+                if (untimedStops.Count == 0)
+                {
+                    sortedStops.AddRange(timedStops.GetRange(i, timedStops.Count - 1));
+                    break;
+                }
+            }
+
+            return sortedStops;
+        }
+
+        public ScheduleStop FindClosestStop(ScheduleStop currentStop, List<ScheduleStop> untimedStops)
+        {
+            var closestStop = (untimedStops[0],100000000000);
+            foreach(var scheduleStop in untimedStops)
+            {
+                var distance = _distanceMatrixService.GetDistanceBetweenTwoStores(currentStop.Stop.Store, scheduleStop.Stop.Store).Result.rows[0].elements[0].distance.value;
+                if(distance < closestStop.Item2)
+                {
+                    closestStop.Item1 = scheduleStop;
+                    closestStop.Item2 = distance;
+                }
+            }
+            return closestStop.Item1;
         }
     }
 }

@@ -25,28 +25,41 @@
                     <th>
                         Duties
                     </th>
+                    <th>
+                        Time
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var schedule in Model.Route.Schedule.ScheduleStops)
+                @foreach (var scheduleStop in Model.Route.Schedule.ScheduleStops)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => schedule.Stop.StoreId)
-                        </td>
-                        <td>
-                            @Html.ActionLink($"{schedule.Stop.Store.StoreName}", "StoreDetails", new { storeId = schedule.Stop.Store.StoreId })
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => schedule.Stop.Store.StreetAddress)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => schedule.Stop.Type)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Stop Details", "StopDetails", new { stopId = schedule.Stop.StopId })
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => scheduleStop.Stop.StoreId)
+                    </td>
+                    <td>
+                        @Html.ActionLink($"{scheduleStop.Stop.Store.StoreName}", "StoreDetails", new { storeId = scheduleStop.Stop.Store.StoreId })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => scheduleStop.Stop.Store.StreetAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => scheduleStop.Stop.Type)
+                    </td>
+                    <td>
+                        @if (scheduleStop.Stop.DeliveryId != null)
+                        {
+                            @scheduleStop.Stop.Delivery.DeliveryTime
+                        }
+                        else
+                        {
+                            @:None
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Stop Details", "StopDetails", new { stopId = scheduleStop.Stop.StopId })
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
