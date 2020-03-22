@@ -4,18 +4,15 @@
     ViewData["Title"] = "EmployeeRoute";
 }
 
-<h1>EmployeeRoute</h1>
+@{ var stamped = false;}
+<h1>
+    @Html.DisplayFor(model => model.Name)
+</h1>
 
-<div>
-    <h4>Employee</h4>
+<div style="height:100%">
+    <h4>Details</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Position)
         </dt>
@@ -35,5 +32,188 @@
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
     </dl>
-    Employee's route goes here
+    <table class="table" border="1">
+        <thead>
+            <tr class="table-primary">
+                <th>
+                    Day of Week
+                </th>
+                @foreach (var routeStore in Model.Route.RouteStores)
+                {
+                    <th>
+
+                        @foreach (var store in ViewBag.Stores)
+                        {
+                            if (store.StoreId == routeStore.StoreId)
+                            {
+                                @store.StoreName
+                            }
+                        }
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    Monday
+                </td>
+                @foreach (var routeStore in Model.Route.RouteStores)
+                {
+                    @foreach (var scheduleStop in Model.Route.Schedule.ScheduleStops)
+                    {
+                        @if (scheduleStop.Stop.DayOfWeek == DayOfWeek.Monday)
+                        {
+                            @if (scheduleStop.Stop.StoreId == routeStore.StoreId)
+                            {
+                                <td>
+                                    @scheduleStop.Stop.Type
+                                </td>
+                                stamped = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (stamped != true)
+                    {
+                        <td>
+                            NA
+                        </td>
+                    }
+                    else
+                    {
+                        stamped = false;
+                    }
+                }
+            </tr>
+            <tr>
+                <td>
+                    Tuesday
+                </td>
+                @foreach (var routeStore in Model.Route.RouteStores)
+                {
+                    @foreach (var scheduleStop in Model.Route.Schedule.ScheduleStops)
+                    {
+                        @if (scheduleStop.Stop.DayOfWeek == DayOfWeek.Tuesday)
+                        {
+                            @if (scheduleStop.Stop.StoreId == routeStore.StoreId)
+                            {
+                                <td>
+                                    @scheduleStop.Stop.Type
+                                </td>
+                                stamped = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (stamped != true)
+                    {
+                        <td>
+                            NA
+                        </td>
+                    }
+                    else
+                    {
+                        stamped = false;
+                    }
+                }
+            </tr>
+            <tr>
+                <td>
+                    Wednesday
+                </td>
+                @foreach (var routeStore in Model.Route.RouteStores)
+                {
+                    @foreach (var scheduleStop in Model.Route.Schedule.ScheduleStops)
+                    {
+                        @if (scheduleStop.Stop.DayOfWeek == DayOfWeek.Wednesday)
+                        {
+                            @if (scheduleStop.Stop.StoreId == routeStore.StoreId)
+                            {
+                                <td>
+                                    @scheduleStop.Stop.Type
+                                </td>
+                                stamped = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (stamped != true)
+                    {
+                        <td>
+                            NA
+                        </td>
+                    }
+                    else
+                    {
+                        stamped = false;
+                    }
+                }
+            </tr>
+            <tr>
+                <td>
+                    Thursday
+                </td>
+                @foreach (var routeStore in Model.Route.RouteStores)
+                {
+                    @foreach (var scheduleStop in Model.Route.Schedule.ScheduleStops)
+                    {
+                        @if (scheduleStop.Stop.DayOfWeek == DayOfWeek.Thursday)
+                        {
+                            @if (scheduleStop.Stop.StoreId == routeStore.StoreId)
+                            {
+                                <td>
+                                    @scheduleStop.Stop.Type
+                                </td>
+                                stamped = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (stamped != true)
+                    {
+                        <td>
+                            NA
+                        </td>
+                    }
+                    else
+                    {
+                        stamped = false;
+                    }
+                }
+            </tr>
+            <tr>
+                <td>
+                    Friday
+                </td>
+                @foreach (var routeStore in Model.Route.RouteStores)
+                {
+                    @foreach (var scheduleStop in Model.Route.Schedule.ScheduleStops)
+                    {
+                        @if (scheduleStop.Stop.DayOfWeek == DayOfWeek.Friday)
+                        {
+                            @if (scheduleStop.Stop.StoreId == routeStore.StoreId)
+                            {
+                                <td>
+                                    @scheduleStop.Stop.Type
+                                </td>
+                                stamped = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (stamped != true)
+                    {
+                        <td>
+                            NA
+                        </td>
+                    }
+                    else
+                    {
+                        stamped = false;
+                    }
+                }
+            </tr>
+        </tbody>
+    </table>
 </div>

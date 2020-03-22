@@ -65,6 +65,19 @@ namespace RouteWayAPP.Services
             }
             return null;
         }
+        public async Task<List<Store>> GetStores()
+        {
+            HttpClient client = new HttpClient();
+            string url = "https://localhost:44339/api/Store/";
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Store>>(json);
+            }
+            return null;
+        }
         public async Task<Delivery> GetDelivery(int deliveryId)
         {
             HttpClient client = new HttpClient();
@@ -75,6 +88,19 @@ namespace RouteWayAPP.Services
             {
                 string json = response.Content.ReadAsStringAsync().Result;
                 return JsonConvert.DeserializeObject<Delivery>(json);
+            }
+            return null;
+        }
+        public async Task<Schedule> GetSchedule(int scheduleId)
+        {
+            HttpClient client = new HttpClient();
+            string url = "https://localhost:44339/api/Schedule/" + scheduleId;
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<Schedule>(json);
             }
             return null;
         }
@@ -101,6 +127,19 @@ namespace RouteWayAPP.Services
             {
                 string json = response.Content.ReadAsStringAsync().Result;
                 return JsonConvert.DeserializeObject<List<ScheduleStop>>(json);
+            }
+            return null;
+        }
+        public async Task<List<RouteStore>> GetRouteStores(int routeId)
+        {
+            HttpClient client = new HttpClient();
+            string url = "https://localhost:44339/api/RouteStore/" + routeId;
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<RouteStore>>(json);
             }
             return null;
         }

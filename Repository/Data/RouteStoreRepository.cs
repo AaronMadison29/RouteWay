@@ -14,7 +14,7 @@ namespace Repository.Data
         public RouteStoreRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
         }
-        public List<RouteStore> GetRouteStoresForRouteIncludeAll(int routeId) => FindByCondition(rs => rs.RouteId == routeId).Include(rs => rs.Store).ToList();
-        public List<RouteStore> GetRouteStoresForStoreIncludeAll(int storeId) => FindByCondition(rs => rs.StoreId == storeId).Include(rs => rs.Route).ToList();
+        public List<RouteStore> GetRouteStoresForRouteIncludeAll(int routeId) => FindByCondition(rs => rs.RouteId == routeId).ToList();
+        public List<RouteStore> GetRouteStoresForStoreIncludeAll(int storeId) => FindByCondition(rs => rs.StoreId == storeId).ToList();
     }
 }

@@ -78,6 +78,11 @@ namespace RouteWayAPP.Controllers
             ViewBag.UserEmployeeId = userEmployee.EmployeeId;
 
             var employee = await _routingService.GetEmployee(employeeId);
+            employee.Route.Schedule.ScheduleStops = await _routingService.GetScheduleStopsForSchedule(employee.Route.ScheduleId);
+            employee.Route.RouteStores = await _routingService.GetRouteStores(employee.RouteId);
+
+            ViewBag.Stores = await _routingService.GetStores();
+
             return View(employee);
         }
 
