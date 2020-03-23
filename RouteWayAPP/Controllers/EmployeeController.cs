@@ -101,18 +101,34 @@ namespace RouteWayAPP.Controllers
             var untimedStops = scheduleStops.Where(ss => ss.Stop.DeliveryId == null).ToList();
 
             var sortedStops = new List<ScheduleStop>();
-
+            if(untimedStops.Count == 0)
+            {
+                return timedStops;
+            }
             for(int i = 0; i < timedStops.Count; i++)
             {
-                if(i == 0)
+                if (untimedStops.Count == 0)
                 {
-                    if (timedStops[i].Stop.Delivery.DeliveryTime > new TimeSpan(6, 30, 0))
+                    sortedStops.AddRange(timedStops.GetRange(i, timedStops.Count - 1 - i + 1));
+                    break;
+                }
+                if (i == 0)
+                {
+                    if (timedStops[i].Stop.Delivery.DeliveryTime > new TimeSpan(6, 45, 0))
                     {
-                        var closestStop = FindClosestStop(timedStops[i], untimedStops);
-                        untimedStops.Remove(closestStop);
-                        sortedStops.Add(closestStop);
+                        var timeBetweenStops = (timedStops[i].Stop.Delivery.DeliveryTime - new TimeSpan(6, 0, 0)).TotalMinutes;
+                        int merchStopsInTimeAvailable = Convert.ToInt32(Math.Floor(timeBetweenStops / 45));
+                        for (int j = 0; j < merchStopsInTimeAvailable; j++)
+                        {
+                            if(untimedStops.Count == 0)
+                            {
+                                break;
+                            }
+                            var closestStop = FindClosestStop(timedStops[i], untimedStops);
+                            untimedStops.Remove(closestStop);
+                            sortedStops.Add(closestStop);
+                        }
                         sortedStops.Add(timedStops[i]);
-                        continue;
                     }
                     else
                     {
@@ -121,20 +137,30 @@ namespace RouteWayAPP.Controllers
                 }
                 else
                 {
-                    if (timedStops[i].Stop.Delivery.DeliveryTime > timedStops[i - 1].Stop.Delivery.DeliveryTime + new TimeSpan(0,30,0))
+                    if (timedStops[i].Stop.Delivery.DeliveryTime > timedStops[i - 1].Stop.Delivery.DeliveryTime + new TimeSpan(0, timedStops[i - 1].Stop.Delivery.CaseCount + 45, 0))
                     {
-                        var closestStop = FindClosestStop(timedStops[i], untimedStops);
-                        untimedStops.Remove(closestStop);
-                        sortedStops.Add(closestStop);
+                        var timeBetweenStops = (timedStops[i].Stop.Delivery.DeliveryTime - new TimeSpan(6, 0, 0)).TotalMinutes;
+                        int merchStopsInTimeAvailable = Convert.ToInt32(Math.Floor(timeBetweenStops / 45));
+                        for (int j = 0; j < merchStopsInTimeAvailable; j++)
+                        {
+                            if (untimedStops.Count == 0)
+                            {
+                                break;
+                            }
+                            var closestStop = FindClosestStop(timedStops[i], untimedStops);
+                            untimedStops.Remove(closestStop);
+                            sortedStops.Add(closestStop);
+                        }
+                        sortedStops.Add(timedStops[i]);
                     }
                     else
                     {
                         sortedStops.Add(timedStops[i]);
                     }
                 }
-                if (untimedStops.Count == 0)
+                if (i == timedStops.Count - 1 && untimedStops.Count != 0)
                 {
-                    sortedStops.AddRange(timedStops.GetRange(i, timedStops.Count - 1));
+                    sortedStops.AddRange(untimedStops);
                     break;
                 }
             }
