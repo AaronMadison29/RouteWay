@@ -173,7 +173,8 @@ namespace RouteWayAPP.Controllers
             var closestStop = (untimedStops[0],100000000000);
             foreach(var scheduleStop in untimedStops)
             {
-                var distance = _distanceMatrixService.GetDistanceBetweenTwoStores(currentStop.Stop.Store, scheduleStop.Stop.Store).Result.rows[0].elements[0].distance.value;
+                var result = _distanceMatrixService.GetDistanceBetweenTwoStores(currentStop.Stop.Store, scheduleStop.Stop.Store).Result;
+                var distance = result.rows[0].elements[0].distance.value;
                 if(distance < closestStop.Item2)
                 {
                     closestStop.Item1 = scheduleStop;

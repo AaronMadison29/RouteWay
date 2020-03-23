@@ -3,104 +3,138 @@
 @{
     ViewData["Title"] = "Index";
 }
-<div>
     <div>
-        <h1>Hello, @Html.DisplayFor(model => model.Name)</h1>
+        <div>
+            <h1>Hello, @Html.DisplayFor(model => model.Name)</h1>
 
-        <h2>Here's your schedule for today:</h2>
-    </div>
+            <h2>Here's your schedule for today:</h2>
+        </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Store Id
-                </th>
-                <th>
-                    Store Name
-                </th>
-                <th>
-                    Street Address
-                </th>
-                <th>
-                    Duties
-                </th>
-                <th>
-                    Time
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var scheduleStop in Model.Route.Schedule.ScheduleStops)
-            {
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => scheduleStop.Stop.StoreId)
-                    </td>
-                    <td>
-                        @Html.ActionLink($"{scheduleStop.Stop.Store.StoreName}", "StoreDetails", new { storeId = scheduleStop.Stop.Store.StoreId })
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => scheduleStop.Stop.Store.StreetAddress)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => scheduleStop.Stop.Type)
-                    </td>
-                    <td>
-                        @if (scheduleStop.Stop.DeliveryId != null)
-                        {
-                            @scheduleStop.Stop.Delivery.DeliveryTime
-                        }
-                        else
-                        {
-                            @:None
-                        }
-                    </td>
-                    <td>
-                        @Html.ActionLink("Stop Details", "StopDetails", new { stopId = scheduleStop.Stop.StopId })
-                    </td>
+                    <th>
+                        Stop Number
+                    </th>
+                    <th>
+                        Store Name
+                    </th>
+                    <th>
+                        Street Address
+                    </th>
+                    <th>
+                        Duties
+                    </th>
+                    <th>
+                        Time
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <div multiple id="locations" style="display:none">
-        @foreach (var scheduleStop in Model.Route.Schedule.ScheduleStops)
-        {
-            @scheduleStop.Stop.Store.StreetAddress
-        }
-    </div>
+            </thead>
+            <tbody>
+                @foreach (var scheduleStop in Model.Route.Schedule.ScheduleStops)
+                {
+                    <tr id="@scheduleStop.Stop.StoreId">
+                        <td>
+                            @Html.ActionLink($"{scheduleStop.Stop.Store.StoreName}", "StoreDetails", new { storeId = scheduleStop.Stop.Store.StoreId })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => scheduleStop.Stop.Store.StreetAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => scheduleStop.Stop.Type)
+                        </td>
+                        <td>
+                            @if (scheduleStop.Stop.DeliveryId != null)
+                            {
+                                @scheduleStop.Stop.Delivery.DeliveryTime
+                            }
+                            else
+                            {
+                                @:None
+                            }
+                        </td>
+                        <td>
+                            @Html.ActionLink("Stop Details", "StopDetails", new { stopId = scheduleStop.Stop.StopId })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
 
-    <body onload="initialize()">
-        <div id="map" style="width: 700px; height: 480px;"></div>
-    </body>
+        <body onload="initMap">
+            <div id="map" style="width: 100%; height: 480px;"></div>
+        </body>
 
-    <script>
-            var map;
-        function initialize() {
-            var mapOptions = {
-                center: { lat: @Model.Route.Schedule.ScheduleStops.First().Stop.Store.Lat, lng: @Model.Route.Schedule.ScheduleStops.First().Stop.Store.Long},
-                zoom: 12,
-            }
-            map = new google.maps.Map(document.getElementById('map'), mapOptions);
-            var pins = [];
-            let store = {};
-        @foreach(var scheduleStop in Model.Route.Schedule.ScheduleStops)
-        {
-            @:store = {lat:@scheduleStop.Stop.Store.Lat,lng:@scheduleStop.Stop.Store.Long}
-            @:pins.push(store);
-        }
-            for (i = 0; i < pins.length; i++) {
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: pins[i]
+        @*<script>
+            function initMap() {
+                var directionsService = new google.maps.DirectionsService();
+                var directionsRenderer = new google.maps.DirectionsRenderer();
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 7
                 });
+                directionsRenderer.setMap(map);
+
+                calculateAndDisplayRoute(directionsService, directionsRenderer);
             }
-        }
-    </script>
 
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key= + @KeyVariables.GoogleKey">
-    </script>
+            function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+                directionsService.route(
+                    {
+                        origin: { lat:@Model.Route.Schedule.ScheduleStops.First().Stop.Store.Lat, lng:@Model.Route.Schedule.ScheduleStops.First().Stop.Store.Long},
+                        destination: { lat:@Model.Route.Schedule.ScheduleStops.Last().Stop.Store.Lat, lng:@Model.Route.Schedule.ScheduleStops.Last().Stop.Store.Long},
+                        travelMode: 'DRIVING'
+                    },
+                    function (response, status) {
+                        if (status === 'OK') {
+                            directionsRenderer.setDirections(response);
+                        } else {
+                            window.alert('Directions request failed due to ' + status);
+                        }
+                    });
+            }
+        </script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=" + @KeyVariables.GoogleKey>
+        </script>*@
 
-</div>
+
+
+
+
+
+
+
+        <script>
+            var map;
+            var bounds;
+            function initialize() {
+                var mapOptions = {
+                    zoom: 12,
+                }
+                map = new google.maps.Map(document.getElementById('map'), mapOptions);
+                bounds = new google.maps.LatLngBounds();
+                var pins = [];
+                let store = {};
+            @foreach(var scheduleStop in Model.Route.Schedule.ScheduleStops)
+            {
+                @:store = { lat:@scheduleStop.Stop.Store.Lat, lng:@scheduleStop.Stop.Store.Long}
+                @:bounds.extend(store);
+                @:pins.push(store);
+            }
+                for (i = 0; i < pins.length; i++) {
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        label: "" + (i + 1),
+                        position: pins[i]
+                    });
+                }
+                map.fitBounds(bounds);
+            }
+        </script>
+
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key= + @KeyVariables.GoogleKey">
+        </script>
+
+    </div>
