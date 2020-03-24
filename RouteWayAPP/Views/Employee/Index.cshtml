@@ -14,9 +14,6 @@
             <thead>
                 <tr>
                     <th>
-                        Stop Number
-                    </th>
-                    <th>
                         Store Name
                     </th>
                     <th>
@@ -62,12 +59,15 @@
         </table>
 
 
-        <body onload="initMap">
+        <body onload="initialize()">
             <div id="map" style="width: 100%; height: 480px;"></div>
         </body>
 
-        @*<script>
-            function initMap() {
+
+
+
+        <script>
+            function initialize() {
                 var directionsService = new google.maps.DirectionsService();
                 var directionsRenderer = new google.maps.DirectionsRenderer();
                 var map = new google.maps.Map(document.getElementById('map'), {
@@ -77,35 +77,40 @@
 
                 calculateAndDisplayRoute(directionsService, directionsRenderer);
             }
-
             function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+                var stops = [];
+                @foreach(var scheduleStop in @Model.Route.Schedule.ScheduleStops)
+                {
+                    if(scheduleStop == @Model.Route.Schedule.ScheduleStops.First() || scheduleStop == @Model.Route.Schedule.ScheduleStops.Last())
+                    {
+                        continue;
+                    }
+                    @:stops.push({ location: { lat:@scheduleStop.Stop.Store.Lat, lng:@scheduleStop.Stop.Store.Long}, stopover: true,})
+                }
                 directionsService.route(
                     {
                         origin: { lat:@Model.Route.Schedule.ScheduleStops.First().Stop.Store.Lat, lng:@Model.Route.Schedule.ScheduleStops.First().Stop.Store.Long},
                         destination: { lat:@Model.Route.Schedule.ScheduleStops.Last().Stop.Store.Lat, lng:@Model.Route.Schedule.ScheduleStops.Last().Stop.Store.Long},
+                        waypoints : stops,
                         travelMode: 'DRIVING'
                     },
                     function (response, status) {
-                        if (status === 'OK') {
-                            directionsRenderer.setDirections(response);
-                        } else {
-                            window.alert('Directions request failed due to ' + status);
-                        }
-                    });
+                    if (status === 'OK') {
+                        directionsRenderer.setDirections(response);
+                    } else {
+                        window.alert('Directions request failed due to ' + status);
+                    }
+                });
             }
         </script>
         <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=" + @KeyVariables.GoogleKey>
-        </script>*@
+                src="https://maps.googleapis.com/maps/api/js?key=@KeyVariables.GoogleKey">
+        </script>
 
 
 
 
-
-
-
-
-        <script>
+        @*<script>
             var map;
             var bounds;
             function initialize() {
@@ -134,7 +139,7 @@
         </script>
 
         <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key= + @KeyVariables.GoogleKey">
-        </script>
+                src="https://maps.googleapis.com/maps/api/js?key=@KeyVariables.GoogleKey">
+        </script>*@
 
     </div>

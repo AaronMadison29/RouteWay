@@ -15,7 +15,7 @@ namespace RouteWayAPP.Services
         public async Task<Rootobject> GetDistanceBetweenTwoStores(Store origin, Store destination)
         {
             HttpClient client = new HttpClient();
-            string url = $"https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={origin.Lat},{origin.Long}&destinations={destination.Lat},{destination.Long}&key=" + KeyVariables.GoogleKey;
+            string url = $"https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins={origin.Lat},{origin.Long}&destinations={destination.Lat},{destination.Long}&key={KeyVariables.GoogleKey}";
             HttpResponseMessage response = await client.GetAsync(url);
 
             if (response.IsSuccessStatusCode)
