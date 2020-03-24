@@ -1,7 +1,7 @@
 ﻿@model RouteWayAPP.Models.Employee
 
 @{
-    ViewData["Title"] = "EmployeeRoute";
+    ViewData["Title"] = "Employee Details";
 }
 
 @{ var stamped = false;}
@@ -13,6 +13,12 @@
     <h4>Details</h4>
     <hr />
     <dl class="row">
+        <dt class="col-sm-2">
+            Route Name
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Route.RouteName)
+        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Position)
         </dt>
@@ -26,7 +32,7 @@
             @Html.DisplayFor(model => model.Email)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNumber)
+            Phone Number
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PhoneNumber)

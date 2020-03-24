@@ -1,17 +1,17 @@
 ﻿@model RouteWayAPP.Models.Delivery
 
 @{
-    ViewData["Title"] = "DeliveryDetails";
+    ViewData["Title"] = "Delivery Details";
 }
 
-<h1>DeliveryDetails</h1>
+<h1>Delivery Details</h1>
 
 <div>
     <h4>Delivery</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DeliveryId)
+            Delivery Id
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DeliveryId)
@@ -24,13 +24,13 @@
             
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CaseCount)
+            Case Count
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CaseCount)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DeliveryTime)
+            Delivery Time
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DeliveryTime)
