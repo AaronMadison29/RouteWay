@@ -29,7 +29,14 @@
             @Html.DisplayNameFor(model => model.Email)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
+            @if (Model.Email != null)
+            {
+                @Html.DisplayFor(model => model.Email)
+            }
+            else
+            {
+                @:N/A
+            }
         </dd>
         <dt class="col-sm-2">
             Phone Number
