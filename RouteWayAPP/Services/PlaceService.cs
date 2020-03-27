@@ -16,7 +16,7 @@ namespace RouteWayAPP.Services
         public async Task<Rootobject> GetPlaceInfo(string placeId)
         {
             HttpClient client = new HttpClient();
-            string url = $"https://maps.googleapis.com/maps/api/place/details/json?place_id=" + placeId + "&fields=rating,formatted_phone_number&key=" + KeyVariables.GoogleKey;
+            string url = $"https://maps.googleapis.com/maps/api/place/details/json?fields=rating,opening_hours,formatted_phone_number&place_id=" + placeId + "&key=" + KeyVariables.GoogleKey;
             HttpResponseMessage response = await client.GetAsync(url);
 
             if (response.IsSuccessStatusCode)

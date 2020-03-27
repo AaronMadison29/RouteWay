@@ -35,6 +35,15 @@
             <dd class="col-sm-8">
                 @ViewBag.StoreInfo.result.rating
             </dd>
+            <dt class="col-sm-4">
+                Hours
+            </dt>
+            <dd class="col-sm-8">
+                @foreach (var day in @ViewBag.StoreInfo.result.opening_hours.weekday_text)
+                {
+                    <text>@day</text><br />
+                }
+            </dd>
         </dl>
         <table class="table">
             <thead>
