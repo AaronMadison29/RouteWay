@@ -29,7 +29,7 @@ namespace RouteWayAPP.Controllers
             var employee = await _routingService.GetEmployee(userId);
             ViewBag.UserEmployeeId = employee.EmployeeId;
             var scheduleStops = await _routingService.GetScheduleStopsForSchedule(employee.Route.ScheduleId);
-            employee.Route.Schedule.ScheduleStops = SortByTime(FilterScheduleForToday(scheduleStops));
+            employee.Route.Schedule.ScheduleStops = SortRoute(FilterScheduleForToday(scheduleStops));
             return View(employee);
         }
 
@@ -93,18 +93,24 @@ namespace RouteWayAPP.Controllers
             return scheduleStops.Where(ss => ss.Stop.DayOfWeek == DateTime.Now.DayOfWeek).ToList();
         }
 
-        public List<ScheduleStop> SortByTime(List<ScheduleStop> scheduleStops)
+        public List<ScheduleStop> SortRoute(List<ScheduleStop> scheduleStops)
         {
-            var timedStops = scheduleStops.Where(ss => ss.Stop.DeliveryId != null).ToList();
-            timedStops = timedStops.OrderBy(ss => ss.Stop.Delivery.DeliveryTime).ToList();
+            var timedStops = SortTimedStops(scheduleStops);
             var untimedStops = scheduleStops.Where(ss => ss.Stop.DeliveryId == null).ToList();
 
+            var mergedStops = MergeStops(timedStops, untimedStops);
+
+            return mergedStops;
+        }
+
+        public List<ScheduleStop> MergeStops(List<ScheduleStop> timedStops, List<ScheduleStop> untimedStops)
+        {
             var sortedStops = new List<ScheduleStop>();
-            if(untimedStops.Count == 0)
+            if (untimedStops.Count == 0)
             {
                 return timedStops;
             }
-            for(int i = 0; i < timedStops.Count; i++)
+            for (int i = 0; i < timedStops.Count; i++)
             {
                 if (untimedStops.Count == 0)
                 {
@@ -119,7 +125,7 @@ namespace RouteWayAPP.Controllers
                         int merchStopsInTimeAvailable = Convert.ToInt32(Math.Floor(timeBetweenStops / 45));
                         for (int j = 0; j < merchStopsInTimeAvailable; j++)
                         {
-                            if(untimedStops.Count == 0)
+                            if (untimedStops.Count == 0)
                             {
                                 break;
                             }
@@ -165,6 +171,13 @@ namespace RouteWayAPP.Controllers
             }
 
             return sortedStops;
+        }
+
+        public List<ScheduleStop> SortTimedStops(List<ScheduleStop> scheduleStops)
+        {
+            var timedStops = scheduleStops.Where(ss => ss.Stop.DeliveryId != null).ToList();
+            timedStops = timedStops.OrderBy(ss => ss.Stop.Delivery.DeliveryTime).ToList();
+            return timedStops;
         }
 
         public ScheduleStop FindClosestStop(ScheduleStop currentStop, List<ScheduleStop> untimedStops)
